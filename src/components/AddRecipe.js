@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField';
-import DatePicker from 'material-ui/DatePicker';
 import RaisedButton from 'material-ui/RaisedButton';
+import { addRecipe } from '../actions'
 
 class AddRecipe extends Component {
     constructor(props) {
         super(props);
         this.state = {
             title: "",
-            date: null,
             content: "",
             titleErrorText: "",
             contentErrorText: ""
         }
         this.submitRecipe = this.submitRecipe.bind(this);
-    }
-
-    componentWillMount() {
-        const todayDate = new Date();
-        const formatDate = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`;
-        this.setState({date: formatDate});
     }
 
     submitRecipe() {
@@ -34,32 +28,34 @@ class AddRecipe extends Component {
         if (this.state.title && this.state.content) {
             this.props.addRecipe({
                 title: this.state.title,
-                date: this.state.date,
                 content: this.state.content
+            });
+            this.setState({
+                title: "",
+                content: ""
             });
         }
     }
 
     render() {
+        const fieldStyle = {width: "100%"};
         return (
             <div className="add_recipe">
                 <TextField 
-                    hintText="Title" 
+                    hintText="Title"
+                    style={fieldStyle}
                     errorText={this.state.titleErrorText}
                     onChange={(e, value) => this.setState({title: value})}
-                />
-                <DatePicker 
-                    hintText="Create date" 
-                    mode="portrait"
-                    defaultDate={new Date(this.state.date)}
-                    onChange={(e, date) => this.setState({date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`})}
+                    value={this.state.title}
                 />
                 <TextField 
                     hintText="Content" 
+                    style={fieldStyle}
                     errorText={this.state.contentErrorText} 
                     multiLine={true}
                     rows={4}
-                    onChange={(e, value) => this.setState({content: value})} 
+                    onChange={(e, value) => this.setState({content: value})}
+                    value={this.state.content}
                 />
                 <RaisedButton 
                     label="Add recipe" 
@@ -72,4 +68,17 @@ class AddRecipe extends Component {
     }
 }
 
-export default AddRecipe
+const mapDispatchToProps = dispatch => {
+    return {
+        addRecipe: recipe => {
+            dispatch(addRecipe(recipe))
+        }
+    }
+}
+
+const AddRecipeContainer = connect(
+    null,
+    mapDispatchToProps
+)(AddRecipe)
+
+export default AddRecipeContainer

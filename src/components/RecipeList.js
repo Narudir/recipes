@@ -1,11 +1,23 @@
 import React from 'react';
 import Recipe from './Recipe';
 import { connect } from 'react-redux'
+import { switchVersion, saveNewVersion } from '../actions'
 
 const RecipeList = (props) => {
-    const recipeList = props.recipes.map((recipe) => {
-        return <li key={recipe.id} className="recipe_list_item"><Recipe recipe={recipe} /></li>
-    });
+    const recipeList = [];
+    for(let recipe of props.recipes) {
+        recipeList.push(
+            <li key={recipe[0]} className="recipe_list_item">
+                <Recipe 
+                    recipe={recipe[1]} 
+                    recipeId={recipe[0]} 
+                    switchVersion={props.switchVersion}
+                    saveNewVersion={props.saveNewVersion}
+                />
+            </li>
+        );
+    }
+
     return (
         <section>
             <h2 className="section_title">Recipes</h2>
@@ -16,8 +28,20 @@ const RecipeList = (props) => {
     )
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        switchVersion: (recipeId, versionId) => {
+            dispatch(switchVersion(recipeId, versionId))
+        },
+        saveNewVersion: (recipeId, newVersion) => {
+            dispatch(saveNewVersion(recipeId, newVersion))
+        }
+    }
+}
+
 const RecipeListContainer = connect(
     (state) => state,
+    mapDispatchToProps
 )(RecipeList)
 
 export default RecipeListContainer

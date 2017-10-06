@@ -1,34 +1,35 @@
-import { ADD_RECIPE, SAVE_RECIPE, SWITCH_VERSION } from './actions'
+import { ADD_RECIPE, SAVE_NEW_VERSION, SWITCH_VERSION } from './actions'
 
 function recipesReducer(state, action) {
     switch (action.type) {
         case ADD_RECIPE: {
-            const newId = state.recipes.length + 1;
-            const latestAndActiveVersion = newId + 0.1;
+            const newId = state.recipes.size + 1;
+            const latestAndActiveVersion = 1;
             let versions = new Map();
             versions.set(latestAndActiveVersion, action.recipe);
+            let todayDate = new Date();
+            let dateFormatted = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`
             let newRecipe = {
-                id: newId,
+                dateCreated: dateFormatted,
                 latestVersion: latestAndActiveVersion,
                 activeVersion: latestAndActiveVersion,
                 versions: versions
             };
-            return {...state, recipes: [...state.recipes, newRecipe]};
-        }
-        case SAVE_RECIPE: {
-            const recipes = state.recipes;
-            const recipe = recipes.get(action.id);
-            let latestVersion = recipe.get("latestVersion");
-            latestVersion = latestVersion + 0.1;
-            const versions = recipe.get("versions");
-            versions.set(latestVersion, action.newVersion);
-            return { recipes };
+            let recipes = new Map(state.recipes);
+            recipes.set(newId, newRecipe);
+            return {...state, recipes};
         }
         case SWITCH_VERSION: {
-            const recipes = state.recipes;
-            const recipe = recipes.get(action.id);
-            recipe.set("activeVersion", action.versionId);
-            return { recipes };
+            let recipes = new Map(state.recipes);
+            recipes.get(action.id).activeVersion = action.versionId;
+            return {...state, recipes};
+        }
+        case SAVE_NEW_VERSION: {
+            let recipes = new Map(state.recipes);
+            let recipe = recipes.get(action.id);
+            recipe.latestVersion = recipe.latestVersion + 1;
+            recipe.versions.set(recipe.latestVersion, action.newVersion);
+            return {...state, recipes};
         }
         default:
             return state;

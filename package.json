@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "serve": "npm run build & babel-node --presets es2015 src/server.js",
+    "serve": "babel-node --presets es2015 src/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -20,14 +20,6 @@ class Recipe extends Component {
         this.setState({title, content});
     }
 
-    componentWillReceiveProps(nextProps) {
-        const recipe = nextProps.recipe;
-        const activeVersion = recipe.activeVersion;
-        const title = recipe.versions.get(activeVersion).title;
-        const content = recipe.versions.get(activeVersion).content;
-        this.setState({title, content});
-    }
-
     handleOpen = () => {
         this.setState({editOpen: true});
     };
@@ -40,7 +32,7 @@ class Recipe extends Component {
             this.setState({editOpen: false});
         } else {
             let newVersion = { title: this.state.title, content: this.state.content };
-            this.props.saveNewVersion(this.props.recipeId, newVersion);
+            this.props.sendNewVersion(this.props.recipeId, newVersion);
             this.setState({editOpen: false});
         }
     };

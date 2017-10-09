@@ -1,22 +1,13 @@
-import { ADD_RECIPE, SAVE_NEW_VERSION, SWITCH_VERSION } from './actions'
+import { ADD_RECIPE, SAVE_NEW_VERSION, SWITCH_VERSION, INJECT_RECIPES } from './actions/actions'
 
 function recipesReducer(state, action) {
     switch (action.type) {
+        case INJECT_RECIPES: {
+            return {recipes: action.recipes};
+        }
         case ADD_RECIPE: {
-            const newId = state.recipes.size + 1;
-            const latestAndActiveVersion = 1;
-            let versions = new Map();
-            versions.set(latestAndActiveVersion, action.recipe);
-            let todayDate = new Date();
-            let dateFormatted = `${todayDate.getFullYear()}-${todayDate.getMonth() + 1}-${todayDate.getDate()}`
-            let newRecipe = {
-                dateCreated: dateFormatted,
-                latestVersion: latestAndActiveVersion,
-                activeVersion: latestAndActiveVersion,
-                versions: versions
-            };
             let recipes = new Map(state.recipes);
-            recipes.set(newId, newRecipe);
+            recipes.set(action.newId, action.newRecipe);
             return {...state, recipes};
         }
         case SWITCH_VERSION: {
@@ -27,7 +18,7 @@ function recipesReducer(state, action) {
         case SAVE_NEW_VERSION: {
             let recipes = new Map(state.recipes);
             let recipe = recipes.get(action.id);
-            recipe.latestVersion = recipe.latestVersion + 1;
+            recipe.latestVersion = Number(recipe.latestVersion) + 1;
             recipe.versions.set(recipe.latestVersion, action.newVersion);
             return {...state, recipes};
         }

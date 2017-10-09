@@ -1,0 +1,78 @@
+{
+    "1": {
+        "activeVersion": "2",
+        "latestVersion": "3",
+        "dateCreated": "2017-10-5",
+        "versions": {
+            "1": {
+                "title": "Chicken wings",
+                "content": "Put some wings in an oven and bake them."
+            },
+            "2": {
+                "title": "Checkine wings buffalo",
+                "content": "Bake wings in an oven and then add some chicken parmezan to them. Add any hot sauce."
+            },
+            "3": {
+                "title": "Checkine wings buffalo",
+                "content": "Put some wings in an oven and bake them. Dont forget to turn off the oven in 40 minutes."
+            }
+        }
+    },
+    "2": {
+        "activeVersion": "1",
+        "latestVersion": "3",
+        "dateCreated": "2017-10-7",
+        "versions": {
+            "1": {
+                "title": "Stew",
+                "content": "Take some beef and vegies and stew for an hour."
+            },
+            "2": {
+                "title": "Stew with mushrooms",
+                "content": "Take some beef and vegies and stew for an hour. Then add some mushrooms and stew for another 20 minutes"
+            },
+            "3": {
+                "title": "Stew",
+                "content": "Take some beef and vegies and stew for an hour."
+            }
+        }
+    },
+    "3": {
+        "activeVersion": "1",
+        "latestVersion": "3",
+        "dateCreated": "2017-10-9",
+        "versions": {
+            "1": {
+                "title": "Baked potatoes",
+                "content": "Take some middle-sized potatoes. Spread spices and salt all over them. Wrap the potatoes in foil.\nPut tatoes into an oven and bake under 400 for 40 minutes."
+            },
+            "2": {
+                "title": "Baked potatoes",
+                "content": "Take some middle-sized potatoes. Spread spices and salt all over them. Wrap the potatoes in foil.\nPut tatoes into an oven and bake under 400 for 35 minutes."
+            },
+            "3": {
+                "title": "Baked potatoes",
+                "content": "Take some middle-sized potatoes. Spread spices and salt all over them. Wrap the potatoes in foil.\nPut tatoes into an oven and bake under 400 for 25 minutes."
+            }
+        }
+    },
+    "4": {
+        "activeVersion": "1",
+        "latestVersion": "3",
+        "dateCreated": "2017-10-9",
+        "versions": {
+            "1": {
+                "title": "Soup",
+                "content": "Take chicken, vegies, water and spices + salt. Throw it all into a pot and boil for 1 hour. Then better don't eat that..."
+            },
+            "2": {
+                "title": "Soup",
+                "content": "Take chicken, vegies, water and spices + salt. Throw it all into a pot and boil for 1 hour. Then eat all of it in one sitting."
+            },
+            "3": {
+                "title": "Soup",
+                "content": "Take chicken, vegies, water and spices + salt. Throw it all into a pot and boil for 1 hour. You can also add some bay leaf for extra smell. Then eat all of it in one sitting."
+            }
+        }
+    }
+}

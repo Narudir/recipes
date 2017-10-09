@@ -1,25 +1,25 @@
 import React from 'react';
 import Recipe from './Recipe';
-import { connect } from 'react-redux'
-import { switchVersion, saveNewVersion } from '../actions'
 
 const RecipeList = (props) => {
     const recipeList = [];
-    for(let recipe of props.recipes) {
-        recipeList.push(
-            <li key={recipe[0]} className="recipe_list_item">
-                <Recipe 
-                    recipe={recipe[1]} 
-                    recipeId={recipe[0]} 
-                    switchVersion={props.switchVersion}
-                    saveNewVersion={props.saveNewVersion}
-                />
-            </li>
-        );
+    if (props.recipes) {
+        for(let recipe of props.recipes) {
+            recipeList.push(
+                <li key={recipe[0]} className="recipe_list_item">
+                    <Recipe 
+                        recipe={recipe[1]} 
+                        recipeId={recipe[0]} 
+                        switchVersion={props.switchVersion}
+                        sendNewVersion={props.sendNewVersion}
+                    />
+                </li>
+            );
+        }
     }
 
     return (
-        <section>
+        <section className="recipe_section">
             <h2 className="section_title">Recipes</h2>
             <ul className="recipe_list">
                 {recipeList}
@@ -28,20 +28,4 @@ const RecipeList = (props) => {
     )
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        switchVersion: (recipeId, versionId) => {
-            dispatch(switchVersion(recipeId, versionId))
-        },
-        saveNewVersion: (recipeId, newVersion) => {
-            dispatch(saveNewVersion(recipeId, newVersion))
-        }
-    }
-}
-
-const RecipeListContainer = connect(
-    (state) => state,
-    mapDispatchToProps
-)(RecipeList)
-
-export default RecipeListContainer
+export default RecipeList

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { addRecipe } from '../actions'
 
 class AddRecipe extends Component {
     constructor(props) {
@@ -26,7 +24,8 @@ class AddRecipe extends Component {
         this.setState({contentErrorText: ""});
 
         if (this.state.title && this.state.content) {
-            this.props.addRecipe({
+            let newId = (this.props.recipes.size + 1).toString();
+            this.props.addRecipe(newId, {
                 title: this.state.title,
                 content: this.state.content
             });
@@ -52,8 +51,6 @@ class AddRecipe extends Component {
                     hintText="Content" 
                     style={fieldStyle}
                     errorText={this.state.contentErrorText} 
-                    multiLine={true}
-                    rows={4}
                     onChange={(e, value) => this.setState({content: value})}
                     value={this.state.content}
                 />
@@ -68,17 +65,4 @@ class AddRecipe extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        addRecipe: recipe => {
-            dispatch(addRecipe(recipe))
-        }
-    }
-}
-
-const AddRecipeContainer = connect(
-    null,
-    mapDispatchToProps
-)(AddRecipe)
-
-export default AddRecipeContainer
+export default AddRecipe
